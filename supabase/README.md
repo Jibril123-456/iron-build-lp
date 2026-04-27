@@ -2,12 +2,14 @@
 
 Étapes rapides pour brancher la base. ~5 minutes.
 
+> **Important** : ce projet utilise Supabase **uniquement comme base de données**, pas comme système d'auth. Le dashboard `/tracking` est protégé par un mot de passe simple (cookie). On n'utilise donc **pas** `@supabase/ssr`, juste `@supabase/supabase-js` côté serveur. Si tu vois un wizard Supabase qui te dit d'installer `@supabase/ssr` et de créer des helpers `utils/supabase/*` — **ignore-le**, c'est pour les projets avec auth utilisateur.
+
 ## 1. Créer un projet Supabase
 
 1. Va sur [supabase.com](https://supabase.com) et crée un compte (gratuit).
 2. Clique **New project**.
 3. Nom au choix, choisis une région proche (`Europe West (Paris)` par défaut).
-4. Mot de passe DB : Supabase en propose un, copie-le quelque part (tu n'en auras pas besoin pour ce projet, mais c'est utile à garder).
+4. Mot de passe DB : Supabase en propose un, copie-le quelque part (utile à garder mais pas requis ici).
 5. Patiente 1-2 min que le projet soit provisionné.
 
 ## 2. Exécuter le schéma SQL
@@ -20,15 +22,17 @@
 
 ## 3. Récupérer les clés API
 
-Va dans **Project Settings** (icône ⚙️) → **API**. Tu y trouves :
+Va dans **Project Settings** (icône ⚙️) → **API** (ou **API Keys** dans les nouveaux dashboards). Tu y trouves :
 
-- **Project URL** → c'est `SUPABASE_URL` et `NEXT_PUBLIC_SUPABASE_URL`.
-- **anon public** → c'est `NEXT_PUBLIC_SUPABASE_ANON_KEY` (publique, OK côté navigateur).
-- **service_role** ⚠️ **secret** → c'est `SUPABASE_SERVICE_ROLE_KEY`. Ne le commit JAMAIS, ne l'expose JAMAIS côté client.
+- **Project URL** → c'est `SUPABASE_URL`. Format : `https://xxxxxxxxxxxx.supabase.co`
+- **Secret key** ⚠️ (anciennement "service_role") → c'est `SUPABASE_SERVICE_ROLE_KEY`.
+  - C'est une clé qui **bypass la RLS** (Row Level Security) — elle a tous les droits sur ta DB.
+  - **Ne la commit JAMAIS, ne l'expose JAMAIS côté client.**
+  - Si tu vois "publishable key" / "anon key" : ce **n'est pas** celle-là. On utilise uniquement la secret/service_role.
 
 ## 4. Configurer `.env.local`
 
-Crée (ou complète) un fichier `.env.local` à la racine du projet :
+Crée un fichier `.env.local` à la racine du projet (copie depuis `.env.example`) et remplis :
 
 ```bash
 # Site
@@ -38,20 +42,18 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_CALCOM_LINK=titouan.grow/call-coworking
 NEXT_PUBLIC_CALENDLY_URL=https://cal.com/titouan.grow/call-coworking
 
-# YouTube vidéo affichée sur /merci
+# Vidéo YouTube post-booking sur /merci
 NEXT_PUBLIC_MERCI_YOUTUBE_ID=YOUR_VIDEO_ID
 
 # Supabase
 SUPABASE_URL=https://xxxxxxxxxxxx.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJ...
-NEXT_PUBLIC_SUPABASE_URL=https://xxxxxxxxxxxx.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJ...
 
-# Mot de passe pour /tracking
-DASHBOARD_PASSWORD=change-me-please
+# Dashboard
+DASHBOARD_PASSWORD=un-mot-de-passe-long-et-unique
 ```
 
-## 5. Installer la dépendance + lancer le dev
+## 5. Installer + lancer
 
 ```bash
 npm install
@@ -61,21 +63,20 @@ npm run dev
 ## 6. Vérifier que ça marche
 
 1. Ouvre http://localhost:3000.
-2. Recharge plusieurs fois la page, scroll, clique sur le CTA, ferme le modal.
-3. Va sur http://localhost:3000/tracking → tu devrais arriver sur la page de login.
-4. Entre le `DASHBOARD_PASSWORD`.
-5. Tu vois les KPIs, le funnel, et la liste des events.
+2. Recharge la page plusieurs fois, scroll, clique sur le CTA, ferme le modal.
+3. Va sur http://localhost:3000/tracking → page de login → entre ton `DASHBOARD_PASSWORD`.
+4. Tu dois voir les KPIs, le funnel, la liste des events.
 
 Si la table `events` reste vide :
 
-- Ouvre la console DevTools → Network → filtre `events`. Tu dois voir des `POST /api/events` qui renvoient 200.
+- DevTools → Network → filtre `events`. Tu dois voir des `POST /api/events` qui renvoient 200.
 - Vérifie que `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` sont bien dans `.env.local` et que tu as **redémarré `npm run dev`** après ajout (Next.js charge `.env.local` au boot).
 
 ## 7. Sécurité — checklist avant prod
 
 - [ ] `DASHBOARD_PASSWORD` est un vrai mot de passe (pas `change-me-please`).
-- [ ] `SUPABASE_SERVICE_ROLE_KEY` n'est JAMAIS exposé côté client (ne commence jamais par `NEXT_PUBLIC_`).
-- [ ] `.env.local` est dans le `.gitignore` (Next.js le fait par défaut, mais vérifie).
+- [ ] `SUPABASE_SERVICE_ROLE_KEY` n'est JAMAIS exposé côté client (jamais préfixé par `NEXT_PUBLIC_`).
+- [ ] `.env.local` est dans le `.gitignore` (Next.js le fait par défaut, déjà OK).
 - [ ] Sur Vercel : ajouter ces vars dans **Project Settings → Environment Variables** avant le premier deploy.
 
 ## 8. Resetter les données
