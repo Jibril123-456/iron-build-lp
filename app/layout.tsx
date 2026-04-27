@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description: siteConfig.meta.description,
     images: [siteConfig.meta.ogImage],
   },
-  icons: { icon: siteConfig.meta.favicon },
+  // Favicon auto-discovered from app/icon.svg
   alternates: { canonical: siteConfig.meta.siteUrl },
 };
 
