@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #0a0a0a;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-card: #fafafa;
+  --color-primary: #0a0a0a;
+  --color-primary-foreground: #ffffff;
+  --color-accent: #ff0000;
+  --color-accent-foreground: #ffffff;
+
+  --radius: 0.75rem;
+
+  --font-display: var(--font-display, ui-sans-serif, system-ui, sans-serif);
+  --font-body: var(--font-body, ui-sans-serif, system-ui, sans-serif);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.035em;
+  font-weight: 800;
+}
+
+h1 {
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-foreground);
+}
+
+/* Section dark variant — flips local theme tokens.
+   Children using bg-card / text-muted / border-border etc. inherit dark values. */
+.section-dark {
+  --color-background: #0a0a0a;
+  --color-foreground: #ffffff;
+  --color-muted: #a1a1aa;
+  --color-border: #262626;
+  --color-card: #141414;
+  --color-primary: #ffffff;
+  --color-primary-foreground: #0a0a0a;
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* === Animations === */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.45); }
+  50%      { box-shadow: 0 0 0 16px rgba(255, 0, 0, 0); }
+}
+
+@keyframes blink-red {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+@keyframes underline-draw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-in              { animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-fade-in         { animation: fade-in 0.6s ease-out both; }
+.animate-slide-in-left   { animation: slide-in-left 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-slide-in-right  { animation: slide-in-right 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-scale-in        { animation: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-marquee         { animation: marquee 28s linear infinite; }
+.animate-pulse-red       { animation: pulse-red 2.4s ease-out infinite; }
+.animate-blink           { animation: blink-red 1.4s ease-in-out infinite; }
+
+.animated-underline {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+.animated-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.05em;
+  height: 0.18em;
+  background: var(--color-accent);
+  transform-origin: left;
+  animation: underline-draw 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+.text-shimmer-red {
+  background: linear-gradient(90deg, currentColor 0%, currentColor 40%, #ff0000 50%, currentColor 60%, currentColor 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 3.6s ease-in-out infinite;
+}
+
+/* === Backgrounds === */
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-foreground) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-foreground) 5%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.bg-radial-fade {
+  background:
+    radial-gradient(60% 50% at 50% 0%, color-mix(in oklab, var(--color-accent) 22%, transparent) 0%, transparent 70%);
+}
+
+.bg-radial-red-glow {
+  background:
+    radial-gradient(50% 50% at 50% 50%, rgba(255, 0, 0, 0.18) 0%, transparent 70%);
+}
+
+.bg-noise {
+  background-image:
+    repeating-radial-gradient(circle at 0 0, transparent 0, color-mix(in oklab, var(--color-foreground) 1.5%, transparent) 1px, transparent 2px);
+}
+
+/* === CTA glow === */
+
+.cta-glow {
+  position: relative;
+  isolation: isolate;
+}
+.cta-glow::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: radial-gradient(60% 100% at 50% 100%, rgba(255, 0, 0, 0.55) 0%, transparent 70%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+.cta-glow:hover::before {
+  opacity: 1;
+}
+
+details summary {
+  list-style: none;
+  cursor: pointer;
+}
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in,
+  .animate-fade-in,
+  .animate-slide-in-left,
+  .animate-slide-in-right,
+  .animate-scale-in,
+  .animate-marquee,
+  .animate-pulse-red,
+  .animate-blink,
+  .text-shimmer-red,
+  .animated-underline::after {
+    animation: none;
+  }
+}
