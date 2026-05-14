@@ -507,7 +507,7 @@ export const siteConfig: SiteConfig = {
       testimonials: [
         {
           quote:
-            "Sérieux j'avais abandonné. Un an et demi. Rien. Semaine 4 avec Iron Build, mes potes me demandaient ce que je faisais. +4,8 kg. C'était pas ma génétique. Je mangeais trop peu. C'est tout.",
+            "Frère j'y croyais plus. Un an et demi à rien voir. J'ai essayé Iron Build un peu par hasard. Semaine 4, mon pote me demande ce que je fais différemment. J'avais même pas encore annoncé. +4,8 kg. C'était juste que je mangeais pas assez. Rien d'autre.",
           name: "Lucas M.",
           role: "21 ans · BUT Informatique · Lyon",
           photo: "/images/avatar-lucas.svg",
@@ -515,7 +515,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           quote:
-            "J'ai cramé 400€ en coaching. Rien. Iron Build m'a montré pourquoi en 5 minutes. Mon corps brûlait tout ce que je mangeais. 45 jours plus tard : +6,2 kg. Frère j'aurais dû commencer là.",
+            "400€ de coaching sur 2 ans. Littéralement rien. Iron Build à 27€ m'a expliqué le problème en 5 minutes. Mon corps brûle plus vite que les autres. Je mangeais pas assez. C'est tout. +6,2 kg en 45 jours. J'aurais dû commencer là franchement.",
           name: "Romain G.",
           role: "23 ans · Licence Droit · Paris",
           photo: "/images/avatar-romain.svg",
@@ -523,7 +523,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           quote:
-            "Même pas de salle. Version maison. Barre de traction sur la porte, sac lesté. +5,1 kg en 5 semaines. La salle c'est pas le problème. Le plan alimentaire change tout.",
+            "J'avais même pas de salle. J'ai fait ça dans ma chambre. Barre de traction sur la porte, sac à dos lesté. +5,1 kg en 5 semaines. Je savais pas que c'était possible sans machine. La clé c'était juste manger assez.",
           name: "Antoine F.",
           role: "20 ans · IUT Informatique · Bordeaux",
           photo: "/images/avatar-antoine.svg",
@@ -531,7 +531,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           quote:
-            "L2 médecine. 50h de cours. Zéro temps. Iron Build : 45 min de séance. 1h le dimanche. Rien de plus. +3,4 kg en 30 jours. Simple. Ça marche.",
+            "Je suis en L2 médecine, j'ai littéralement zéro temps. J'allais pas me lancer dans un truc qui prend 2h par jour. Iron Build c'est 45 min de séance. 1h le dimanche pour préparer à manger. C'est tout. +3,4 kg en un mois. Honnêtement j'en revenais pas.",
           name: "Thomas K.",
           role: "22 ans · L2 Médecine · Strasbourg",
           photo: "/images/avatar-thomas.svg",
@@ -539,7 +539,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           quote:
-            "Ma famille dit 'c'est génétique'. J'y croyais. Semaine 4 : +4,2 kg. Premier jour où je kiffe mon reflet. Je mangeais 700 kcal trop peu chaque jour. C'est tout ce que c'était.",
+            "Toute ma famille est mince. On m'a toujours dit c'est génétique. J'y croyais. Genre j'avais accepté. Semaine 4 avec Iron Build, +4,2 kg. Je me regarde dans le miroir et pour la première fois je kiffe. Je mangeais 700 calories trop peu chaque jour. C'était ça le problème. Juste ça.",
           name: "Nathan B.",
           role: "24 ans · Master Marketing · Nantes",
           photo: "/images/avatar-nathan.svg",
@@ -547,7 +547,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           quote:
-            "Je suis désorganisé. Iron Build c'est une checklist. 4 cases le soir. 1h le dimanche. +5,5 kg en 6 semaines. Le système marche même pour les gens comme moi.",
+            "Honnêtement je suis quelqu'un de désorganisé. Je tiens jamais mes habitudes longtemps. Iron Build c'est juste une checklist. 4 trucs à cocher le soir. 1h le dimanche. J'ai tenu 6 semaines. +5,5 kg. Même moi j'ai réussi.",
           name: "Maxime D.",
           role: "20 ans · Licence Physique · Lille",
           photo: "/images/avatar-maxime.svg",
