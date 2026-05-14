@@ -258,7 +258,7 @@ export const siteConfig: SiteConfig = {
   meta: {
     title: "Iron Build™ — De Skinny à Solide en 30 jours",
     description:
-      "Le seul programme conçu pour les métabolismes rapides. +3 à +5 kg de muscle visible en 30 jours. 3 200+ skinny transformés. Garantie remboursement 30 jours.",
+      "87 gars transformés. +4,8 kg en 30 jours. Ton corps brûle tout ? On a la solution. 27€. Garantie 30 jours.",
     siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
     ogImage: "/og.png",
     locale: "fr_FR",
@@ -266,7 +266,6 @@ export const siteConfig: SiteConfig = {
     keywords: [
       "prise de masse skinny",
       "programme fitness étudiant",
-      "ectomorphe muscu",
       "maigre prendre du muscle",
       "Iron Build",
       "calories invisibles",
@@ -298,8 +297,8 @@ export const siteConfig: SiteConfig = {
     scrollDepths: [25, 50, 75, 100],
     timeMilestones: [15, 30, 60, 120],
     customEvents: [
-      { name: "checkout_click", description: "Clic sur le CTA principal (accès programme 27€)" },
-      { name: "order_bump_view", description: "Section Pricing visible (order bump en vue)" },
+      { name: "checkout_click", description: "Clic sur le CTA principal" },
+      { name: "order_bump_view", description: "Section Pricing visible" },
     ],
   },
   links: {
@@ -311,7 +310,7 @@ export const siteConfig: SiteConfig = {
       id: "qualification",
       intro: {
         headline: "Quelques questions rapides.",
-        subheadline: "Pour s'assurer qu'Iron Build est adapté à ton profil.",
+        subheadline: "Pour voir si Iron Build est fait pour toi.",
       },
       questions: [
         {
@@ -324,7 +323,7 @@ export const siteConfig: SiteConfig = {
         {
           id: "duration",
           type: "text",
-          label: "Depuis combien de temps tu t'entraînes sans résultats visibles ?",
+          label: "Depuis combien de temps tu stagnes ?",
           placeholder: "Ex : 8 mois, 2 ans...",
           required: true,
         },
@@ -339,39 +338,39 @@ export const siteConfig: SiteConfig = {
       unqualifiedScreen: {
         headline: "Iron Build n'est pas fait pour toi.",
         description:
-          "Le programme est conçu pour ceux qui s'entraînent déjà mais stagnent. Reviens quand tu auras commencé.",
+          "Le programme est pour ceux qui stagnent. Reviens quand tu auras commencé.",
       },
       successScreen: {
         kind: "calcom",
         calcomLink: "ironbuild/discovery",
         namespace: "qualification",
         headline: "C'est bon.",
-        subheadline: "Tu reçois un email avec ton accès sous 2 minutes.",
+        subheadline: "Tu reçois ton accès par email sous 2 minutes.",
       },
     },
   },
   marquee: {
     enabled: true,
     items: [
-      "3 200+ skinny transformés",
+      "87 gars transformés",
       "+4,8 kg en 30 jours",
-      "Garantie remboursement 30 jours",
+      "Garantie 30 jours",
       "Version salle + maison",
-      "Prix étudiant 27€",
-      "Méthode calories invisibles",
-      "Accès à vie inclus",
+      "27€ — prix étudiant",
+      "Calories invisibles",
+      "Accès immédiat",
     ],
   },
   sections: {
     hero: {
       enabled: true,
-      badge: "■ 3 200+ skinny transformés",
-      headline: "De Skinny à Solide en 30 jours — même si t'as jamais réussi à prendre du muscle",
+      badge: "■ 87 gars déjà transformés",
+      headline: "De Skinny à Solide en 30 jours — même si t'as jamais réussi",
       headlineHighlight: "30 jours",
       subheadline:
-        "T'as mangé. T'as soulevé. T'as rien vu. C'est pas toi. C'est la méthode.",
+        "T'as tout essayé. Rien a marché. Même corps. 18 mois après. C'est pas toi. C'est la méthode.",
       primaryCta: {
-        label: "Accéder — 27€ →",
+        label: "JE VEUX LE MÊME RÉSULTAT — 27€",
         href: CHECKOUT_URL,
         variant: "primary",
         trackingEvent: "InitiateCheckout",
@@ -390,13 +389,13 @@ export const siteConfig: SiteConfig = {
     },
     socialProof: {
       enabled: true,
-      caption: "Rejoins 3 200+ skinny déjà transformés",
+      caption: "87 gars ont déjà appliqué la méthode",
       logos: [],
       stats: [
-        { value: "3 200+", label: "Skinny transformés" },
+        { value: "87", label: "Gars transformés" },
         { value: "+4,8 kg", label: "En 30 jours en moyenne" },
         { value: "30 jours", label: "Garantie remboursement" },
-        { value: "27€", label: "Prix unique étudiant" },
+        { value: "27€", label: "Prix unique" },
       ],
       shortQuotes: [
         {
@@ -415,98 +414,100 @@ export const siteConfig: SiteConfig = {
       eyebrow: "Le vrai problème",
       headline: "T'es pas skinny pour la vie. T'as juste la mauvaise méthode.",
       description:
-        "T'as beau manger. T'as beau t'entraîner. Ça stagne. Pas ta faute. La méthode est fausse.",
+        "T'as tout essayé. Rien a marché. Même corps. 18 mois après. C'est pas ta faute. La méthode est fausse.",
       pains: [
         {
           title: "\"Je mange beaucoup et grossis pas\"",
           description:
-            "Tu manges 500 kcal sous ton besoin. Chaque jour. Ton corps brûle tout. Aucun programme générique te le dit.",
+            "Tu manges 500 kcal sous ton besoin. Chaque jour. Ton corps brûle tout. Aucun programme te le dit.",
         },
         {
           title: "18 mois de salle. Même corps.",
           description:
-            "T'as payé. T'es allé. T'as suivi. Et ton miroir dit la même chose qu'au premier jour. C'est pas toi. C'est la méthode.",
+            "T'as payé. T'es allé. T'as suivi. Même résultat. C'est pas toi. C'est la méthode.",
         },
         {
           title: "Les autres grossissent. Toi non.",
           description:
-            "Dans ta promo, ils progressent. Toi non. Mêmes conseils. Même effort. Frustrant. Et explicable.",
+            "Mêmes conseils. Même effort. Eux progressent. Toi tu stagnes. Frustrant. Et explicable.",
         },
         {
-          title: "Tu commences à croire à ta génétique.",
+          title: "Tu crois que c'est ta génétique.",
           description:
-            "Logique après des mois sans résultat. Mais c'est faux. La génétique fixe le plafond. Pas le sol.",
+            "Logique après des mois sans résultat. C'est faux. La génétique fixe le plafond. Pas le sol.",
         },
       ],
     },
     solution: {
       enabled: true,
       dark: false,
-      eyebrow: "La méthode Iron Build",
-      headline: "Une approche 100% calibrée pour les métabolismes rapides.",
+      eyebrow: "Comment ça marche",
+      headline: "3 étapes. C'est tout.",
       description:
-        "Chaque calorie calculée pour TON corps. Chaque séance pensée pour ton emploi du temps. Pas une moyenne. TON profil skinny.",
+        "Iron Build ne nécessite aucune salle. Aucun coach. Aucun gros budget. Juste la bonne méthode.",
       bullets: [
-        "Calories calculées pour TON métabolisme — pas une moyenne",
-        "+990 kcal/jour sans manger plus — la technique invisible",
-        "Version salle et maison — tu commences là où t'es",
-        "Résultats en 30 jours — ou remboursé. Zéro question.",
+        "✓ Tu calcules tes vraies calories — ton corps brûle plus que la moyenne",
+        "✓ Tu ajoutes +990 kcal/jour sans manger plus — technique invisible",
+        "✓ Tu suis le programme 30 jours — résultats visibles ou remboursé",
+        "❌ Pas besoin de salle de sport",
+        "❌ Pas besoin de coach à 200€",
+        "❌ Pas besoin de manger énorme",
       ],
     },
     features: {
       enabled: true,
       dark: true,
       eyebrow: "Ce que tu obtiens",
-      headline: "Tout ce qu'il faut. Rien de superflu.",
+      headline: "Tout ce qu'il faut. Rien de plus.",
       description:
-        "Programme complet, accès immédiat après paiement. Tu télécharges, tu commences aujourd'hui.",
+        "Accès immédiat. Tu télécharges. Tu commences aujourd'hui.",
       features: [
         {
           icon: "target",
-          title: "Programme split 3/4/5 jours",
+          title: "Programme 3/4/5 jours",
           description:
-            "3 variations selon ton emploi du temps et ton niveau. Version salle ET version maison avec sac lesté — aucun abonnement requis.",
+            "Salle ou maison. Sac lesté, barre de porte. Pas d'abonnement requis. Tu commences là où t'es.",
         },
         {
           icon: "chart",
-          title: "Plan alimentaire + calculateur calories",
+          title: "Plan alimentaire + calculateur",
           description:
-            "Formule de calcul précise pour TON métabolisme. Tu sais exactement quoi manger, en quelle quantité, et à quel moment.",
+            "Calcul précis pour TON corps. Tu sais quoi manger. En quelle quantité. À quel moment.",
         },
         {
           icon: "spark",
-          title: "Technique des calories invisibles",
+          title: "Technique calories invisibles",
           description:
-            "+990 kcal par jour sans augmenter le volume de nourriture. La technique skinny que 99% des programmes ignorent — et qui change tout.",
+            "+990 kcal par jour. Sans manger plus. La technique que 99% des programmes ignorent.",
         },
         {
           icon: "rocket",
           title: "Tracker de progression 8 semaines",
           description:
-            "Tableau de bord simple : poids, mensurations, photos toutes les 2 semaines. Tu vois ta progression — ça change tout pour la motivation.",
+            "Poids. Mensurations. Photos. Tu vois ce qui change. Semaine après semaine.",
         },
         {
           icon: "zap",
-          title: "Bonus : Nutrition Express (add-on 9€)",
+          title: "Bonus : Nutrition Express — 9€",
           description:
-            "30 recettes rapides + 15 shakes hypercaloriques. Meal prep du dimanche en 1h, liste de courses à 30€/semaine. Disponible en option lors de l'achat.",
+            "30 recettes rapides + 15 shakes. Meal prep en 1h le dimanche. Courses à 30€/semaine.",
         },
         {
           icon: "shield",
-          title: "Accès à vie + mises à jour gratuites",
+          title: "Accès à vie",
           description:
-            "Tu achètes une fois, tu gardes pour toujours. Toutes les futures versions du programme sont incluses — sans supplément.",
+            "Tu achètes une fois. Tu gardes pour toujours. Mises à jour incluses. Zéro supplément.",
         },
       ],
     },
     testimonials: {
       enabled: true,
-      eyebrow: "Ils ont appliqué la méthode",
+      eyebrow: "87 gars ont appliqué la méthode",
       headline: "Leurs mots. Pas les nôtres.",
       testimonials: [
         {
           quote:
-            "Sérieux j'avais abandonné. Un an et demi de salle. Rien. Semaine 4 avec Iron Build, mes potes me demandaient ce que je faisais. +4,8 kg. C'était pas ma génétique. Je mangeais 500 kcal trop peu chaque jour.",
+            "Sérieux j'avais abandonné. Un an et demi. Rien. Semaine 4 avec Iron Build, mes potes me demandaient ce que je faisais. +4,8 kg. C'était pas ma génétique. Je mangeais trop peu. C'est tout.",
           name: "Lucas M.",
           role: "21 ans · BUT Informatique · Lyon",
           photo: "/images/avatar-lucas.svg",
@@ -514,7 +515,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           quote:
-            "J'ai cramé 400€ en coaching. Rien. Iron Build m'a montré pourquoi en 5 minutes. La technique des calories invisibles. 45 jours plus tard : +6,2 kg. Frère j'aurais dû commencer là.",
+            "J'ai cramé 400€ en coaching. Rien. Iron Build m'a montré pourquoi en 5 minutes. Mon corps brûlait tout ce que je mangeais. 45 jours plus tard : +6,2 kg. Frère j'aurais dû commencer là.",
           name: "Romain G.",
           role: "23 ans · Licence Droit · Paris",
           photo: "/images/avatar-romain.svg",
@@ -522,7 +523,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           quote:
-            "Même pas de salle. Version maison. Barre de traction sur la porte, sac à dos lesté. +5,1 kg en 5 semaines. La salle c'est pas le problème. C'est le plan alimentaire qui change tout.",
+            "Même pas de salle. Version maison. Barre de traction sur la porte, sac lesté. +5,1 kg en 5 semaines. La salle c'est pas le problème. Le plan alimentaire change tout.",
           name: "Antoine F.",
           role: "20 ans · IUT Informatique · Bordeaux",
           photo: "/images/avatar-antoine.svg",
@@ -530,7 +531,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           quote:
-            "L2 médecine. 50h de cours. Zéro temps. Iron Build c'est 45 min de séance et 1h de meal prep le dimanche. Rien de plus. +3,4 kg en 30 jours. Système simple. Ça marche.",
+            "L2 médecine. 50h de cours. Zéro temps. Iron Build : 45 min de séance. 1h le dimanche. Rien de plus. +3,4 kg en 30 jours. Simple. Ça marche.",
           name: "Thomas K.",
           role: "22 ans · L2 Médecine · Strasbourg",
           photo: "/images/avatar-thomas.svg",
@@ -538,7 +539,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           quote:
-            "Ma famille dit depuis toujours 'c'est génétique'. J'y croyais. Semaine 4 : +4,2 kg. Je me regarde dans le miroir. Je kiffe enfin. Je mangeais 700 kcal trop peu. C'est tout.",
+            "Ma famille dit 'c'est génétique'. J'y croyais. Semaine 4 : +4,2 kg. Premier jour où je kiffe mon reflet. Je mangeais 700 kcal trop peu chaque jour. C'est tout ce que c'était.",
           name: "Nathan B.",
           role: "24 ans · Master Marketing · Nantes",
           photo: "/images/avatar-nathan.svg",
@@ -546,7 +547,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           quote:
-            "Je suis désorganisé au max. Iron Build c'est une checklist. 4 cases le soir. 1h le dimanche. Rien de plus. +5,5 kg en 6 semaines. Le système marche même pour les gens comme moi.",
+            "Je suis désorganisé. Iron Build c'est une checklist. 4 cases le soir. 1h le dimanche. +5,5 kg en 6 semaines. Le système marche même pour les gens comme moi.",
           name: "Maxime D.",
           role: "20 ans · Licence Physique · Lille",
           photo: "/images/avatar-maxime.svg",
@@ -556,10 +557,10 @@ export const siteConfig: SiteConfig = {
     },
     pricing: {
       enabled: true,
-      eyebrow: "Investissement",
-      headline: "Un prix étudiant. Des résultats réels.",
+      eyebrow: "Uniquement sur cette page",
+      headline: "27€. Pas 97€. Pas 200€. 27€.",
       description:
-        "27€ là où les coachs facturent 200 à 400€ pour moins de résultats. Garanti ou remboursé.",
+        "Prix de lancement. Disponible aujourd'hui seulement. Garanti ou remboursé.",
       plans: [
         {
           name: "Iron Build™",
@@ -569,15 +570,15 @@ export const siteConfig: SiteConfig = {
           description:
             "Tout ce qu'il faut pour passer de skinny à solide en 30 jours.",
           features: [
-            "Programme split 3/4/5 jours (salle + maison)",
-            "Plan alimentaire calculé pour ton métabolisme",
-            "Technique des calories invisibles (+990 kcal/jour)",
+            "Programme 3/4/5 jours (salle + maison)",
+            "Plan alimentaire pour TON corps",
+            "Technique calories invisibles (+990 kcal/jour)",
             "Tracker de progression 8 semaines",
-            "Accès à vie + mises à jour gratuites",
-            "Garantie remboursement 30 jours — zéro question",
+            "Accès à vie + mises à jour",
+            "Garantie 30 jours — zéro question",
           ],
           cta: {
-            label: "Accéder au programme — 27€",
+            label: "JE PRENDS IRON BUILD — 27€",
             href: CHECKOUT_URL,
             variant: "primary",
             trackingEvent: "InitiateCheckout",
@@ -587,7 +588,7 @@ export const siteConfig: SiteConfig = {
           orderBump: {
             label: "Nutrition Express",
             price: "9€",
-            description: "30 recettes rapides + 15 shakes hypercaloriques. Meal prep du dimanche en 1h.",
+            description: "30 recettes rapides + 15 shakes. Meal prep en 1h. Courses à 30€/semaine.",
           },
         },
       ],
@@ -601,50 +602,50 @@ export const siteConfig: SiteConfig = {
       headline: "Les questions qu'on me pose en vrai.",
       items: [
         {
-          question: "J'ai déjà essayé des programmes. Ça a jamais marché. Pourquoi ça marcherait là ?",
+          question: "J'ai déjà essayé. Ça a jamais marché. Pourquoi là ce serait différent ?",
           answer:
-            "Parce que les autres sont calibrés pour des profils moyens. Iron Build est fait pour les métabolismes rapides. Chaque calorie calculée pour TON corps. La garantie 30 jours te protège si t'as le moindre doute.",
+            "Les autres programmes sont faits pour les gens normaux. Pas pour toi. Ton corps brûle plus vite. Iron Build calcule tes vraies calories. La garantie 30 jours est là si t'as le moindre doute.",
         },
         {
           question: "C'est ma génétique. Aucun programme peut changer ça.",
           answer:
-            "La génétique fixe le plafond. Pas le sol. 99% des skinny qui stagnent mangent trop peu. C'est tout. Lucas M. disait la même chose. +4,8 kg en 30 jours.",
+            "La génétique fixe le plafond. Pas le sol. 99% des gars qui stagnent mangent trop peu. C'est tout. Lucas M. disait pareil. +4,8 kg en 30 jours.",
         },
         {
           question: "27€ c'est quoi le catch ?",
           answer:
-            "Le prix bas c'est un choix. L'objectif c'est rendre la méthode accessible. Romain G. avait cramé 400€ en coaching. Iron Build à 27€ lui a donné +6,2 kg en 45 jours. La garantie est là si t'as le moindre doute.",
+            "Pas de catch. Prix de lancement pour rendre la méthode accessible. Romain G. avait cramé 400€ en coaching. Iron Build à 27€ lui a donné +6,2 kg en 45 jours.",
         },
         {
           question: "J'ai pas de salle. Ça marche quand même ?",
           answer:
-            "Oui. Version maison complète incluse. Pompes, tractions, sac lesté. Antoine F. a pris +5,1 kg en 35 jours sans jamais aller en salle. C'est le plan alimentaire qui change tout — pas l'équipement.",
+            "Oui. Version maison incluse. Pompes, tractions, sac lesté. Antoine F. : +5,1 kg en 35 jours sans jamais aller en salle. C'est le plan alimentaire qui change tout.",
         },
         {
-          question: "J'ai un emploi du temps de ouf. Combien de temps ça prend ?",
+          question: "J'ai un emploi du temps chargé. Combien de temps par jour ?",
           answer:
-            "45 minutes de séance. 1h de meal prep le dimanche. C'est tout. Thomas K. en L2 médecine a pris +3,4 kg en 30 jours. Si lui il a pu, t'as aucune excuse.",
+            "45 minutes de séance. 1h de meal prep le dimanche. C'est tout. Thomas K. en L2 médecine : +3,4 kg en 30 jours. Si lui il a pu, t'as aucune excuse.",
         },
         {
           question: "Je reçois comment le programme ?",
           answer:
-            "Accès immédiat. Paiement confirmé → email avec le lien. Tout en moins de 2 minutes. Plan d'entraînement, plan alimentaire, tracker, calculateur.",
+            "Accès immédiat. Paiement confirmé → email avec le lien. Tout en moins de 2 minutes.",
         },
         {
-          question: "La garantie 30 jours c'est vraiment sérieux ?",
+          question: "La garantie 30 jours c'est vraiment sans condition ?",
           answer:
-            "Oui. Tu suis la méthode, t'as pas de résultats, on rembourse. Un email suffit. Zéro question. Zéro justification. Zéro procédure.",
+            "Oui. Tu appliques. T'as pas de résultats. On rembourse. Un email suffit. Zéro question. Zéro procédure.",
         },
       ],
     },
     finalCta: {
       enabled: true,
       dark: true,
-      headline: "T'as stagné assez longtemps.",
+      headline: "87 gars ont commencé. T'attends quoi ?",
       subheadline:
-        "3 200 skinny ont commencé avant toi. 27€. Accès immédiat. Résultats en 30 jours ou remboursé.",
+        "27€. Accès immédiat. Résultats en 30 jours ou remboursé. Aucune excuse.",
       cta: {
-        label: "Accéder au programme — 27€",
+        label: "JE PRENDS IRON BUILD — 27€",
         href: CHECKOUT_URL,
         variant: "primary",
         trackingEvent: "InitiateCheckout",
