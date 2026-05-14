@@ -4,66 +4,101 @@ import { Container } from "@/components/ui/Container";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: `Merci · ${siteConfig.sections.footer.brand}`,
-  description: "Ton appel est confirmé. En attendant, regarde cette vidéo.",
+  title: `Bienvenue · ${siteConfig.sections.footer.brand}`,
+  description: "Ta transformation commence maintenant. Accès immédiat à ton programme.",
   robots: { index: false, follow: false },
 };
 
 export default function MerciPage() {
-  const youtubeId = process.env.NEXT_PUBLIC_MERCI_YOUTUBE_ID || "YOUR_VIDEO_ID";
-  const isPlaceholder = youtubeId === "YOUR_VIDEO_ID";
+  const checkoutUrl = process.env.NEXT_PUBLIC_UPSELL_CHECKOUT_URL || "/upsell";
 
   return (
     <main className="min-h-screen bg-background py-16 md:py-24">
       <Container className="max-w-3xl">
-        <div className="text-center mb-10 md:mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-700 mb-6">
+
+        {/* Confirmation */}
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-400 mb-8">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 6 9 17l-5-5" />
             </svg>
-            Appel confirmé
+            Paiement confirmé · Accès immédiat
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
-            Bien joué. À très vite.
+          <h1 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-6">
+            Bienvenue dans Iron Build —<br />
+            <span className="text-accent">ta transformation commence maintenant.</span>
           </h1>
-          <p className="text-muted text-base md:text-lg max-w-xl mx-auto">
-            Tu as un mail de confirmation avec le lien Google Meet. En attendant le rendez-vous,
-            cette vidéo te donnera 15 minutes d&apos;avance sur ce qu&apos;on va aborder.
+          <p className="text-muted text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+            Tu reçois un email avec ton lien de téléchargement dans les 2 prochaines minutes.
+            Vérifie tes spams si tu ne le vois pas.
           </p>
         </div>
 
-        <div className="rounded-2xl overflow-hidden border border-border bg-card aspect-video shadow-xl">
-          {isPlaceholder ? (
-            <div className="h-full w-full flex flex-col items-center justify-center text-center px-6 py-10 bg-card">
-              <div className="grid h-14 w-14 place-items-center rounded-full bg-[#ff0000]/10 text-[#ff0000] mb-4">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.4-1.9.5-3.8.5-5.8s-.1-3.9-.5-5.8ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z" />
-                </svg>
-              </div>
-              <p className="text-sm text-muted max-w-md">
-                Configure <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-background">NEXT_PUBLIC_MERCI_YOUTUBE_ID</code> dans <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-background">.env.local</code> avec l&apos;ID de ta vidéo YouTube (la partie après <code>v=</code> dans l&apos;URL).
-              </p>
-            </div>
-          ) : (
-            <iframe
-              src={`https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0`}
-              title="Vidéo de bienvenue"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              className="h-full w-full"
-            />
-          )}
+        {/* Ce que tu as dans ton programme */}
+        <div className="rounded-sm border border-border bg-card p-8 mb-10">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-accent mb-5">
+            Ce que tu as dans ton programme
+          </p>
+          <ul className="space-y-3">
+            {[
+              "Programme split 3/4/5 jours (version salle + version maison)",
+              "Plan alimentaire calculé pour ton métabolisme rapide",
+              "Technique des calories invisibles (+990 kcal/jour)",
+              "Tracker de progression sur 8 semaines",
+              "Accès à vie + toutes les mises à jour gratuites",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-3 text-sm">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                </span>
+                <span className="text-foreground/90">{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="mt-10 flex justify-center">
+        {/* Upsell Student Physique Accelerator */}
+        <div className="rounded-sm border border-accent/30 bg-accent/5 p-8 mb-10">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-accent mb-3">
+            Offre exclusive · Disponible maintenant seulement
+          </p>
+          <h2 className="text-2xl md:text-3xl font-black tracking-tight mb-3">
+            Multiplie tes résultats avec le<br />
+            <span className="text-accent">Student Physique Accelerator</span>
+          </h2>
+          <p className="text-muted text-sm leading-relaxed mb-6">
+            Le programme Iron Build te donne la base. L&apos;Accelerator ajoute le niveau supérieur :
+            périodisation avancée sur 16 semaines, protocoles de récupération, ajustements caloriques
+            progressifs — conçu pour maximiser chaque kilo pris. <strong className="text-foreground">Les membres qui le combinent
+            avec Iron Build prennent en moyenne 2× plus de masse en 60 jours.</strong>
+          </p>
+          <div className="flex items-baseline gap-3 mb-6">
+            <span className="text-4xl font-black text-accent">67€</span>
+            <span className="text-muted text-sm line-through">147€</span>
+            <span className="text-xs font-medium uppercase tracking-wider text-emerald-400">−54%</span>
+          </div>
+          <a
+            href={checkoutUrl}
+            className="inline-flex items-center justify-center w-full rounded-sm bg-accent text-accent-foreground font-bold text-sm px-6 py-4 hover:opacity-90 transition-opacity"
+          >
+            Ajouter l&apos;Accelerator — 67€
+          </a>
+          <p className="text-center text-xs text-muted mt-3">
+            Cette offre n&apos;est disponible qu&apos;une seule fois, à ce prix.
+          </p>
+        </div>
+
+        <div className="flex justify-center">
           <Link
             href="/"
             className="text-sm text-muted hover:text-foreground transition-colors"
           >
-            ← Retour à l&apos;accueil
+            Non merci, je garde juste Iron Build →
           </Link>
         </div>
+
       </Container>
     </main>
   );

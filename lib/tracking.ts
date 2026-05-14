@@ -20,7 +20,7 @@ export type StandardEvent =
 
 export type TrackPayload = Record<string, string | number | boolean | undefined>;
 
-const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"] as const;
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "ttclid", "fbclid"] as const;
 const UTM_STORAGE_KEY = "lp_utm";
 
 function getFiredSet(): Set<string> {

@@ -141,8 +141,8 @@ export type SiteConfig = {
 export type HeroSection = {
   enabled: boolean;
   badge?: string;
+  liveIndicator?: string;
   headline: string;
-  /** Optional substring of headline rendered with an animated red underline. */
   headlineHighlight?: string;
   subheadline: string;
   primaryCta: CTA;
@@ -151,7 +151,8 @@ export type HeroSection = {
     | { kind: "none" }
     | { kind: "image"; src: string; alt: string }
     | { kind: "video"; src: string; poster?: string }
-    | { kind: "embed"; html: string };
+    | { kind: "embed"; html: string }
+    | { kind: "beforeafter"; before: string; after: string };
   trustLine?: string;
 };
 
@@ -212,12 +213,14 @@ export type PricingSection = {
   plans: {
     name: string;
     price: string;
+    originalPrice?: string;
     period?: string;
     description?: string;
     features: string[];
     cta: CTA;
     highlighted?: boolean;
     badge?: string;
+    orderBump?: { label: string; price: string; description: string };
   }[];
   guarantee?: string;
 };
@@ -249,46 +252,45 @@ export type FooterSection = {
   legal: string;
 };
 
-const CALCOM_LINK = process.env.NEXT_PUBLIC_CALCOM_LINK || "titouan.grow/call-coworking";
-const CALCOM_NAMESPACE = "qualification";
-const CALENDLY_FALLBACK = process.env.NEXT_PUBLIC_CALENDLY_URL || `https://cal.com/${CALCOM_LINK}`;
+const CHECKOUT_URL = process.env.NEXT_PUBLIC_CHECKOUT_URL || "#checkout";
 
 export const siteConfig: SiteConfig = {
   meta: {
-    title: "Titouan — Atteins 10 000€/mois avec 1 vidéo YouTube par semaine",
+    title: "Iron Build™ — De Skinny à Solide en 30 jours",
     description:
-      "Coaching 1:1 pour les coachs qui veulent passer de 3-5k€/mois à 10k€/mois grâce à une stratégie YouTube long format. Pas de Reels, pas d'ads. 12 semaines, 1 appel par semaine.",
+      "Le seul programme conçu pour les métabolismes rapides. +3 à +5 kg de muscle visible en 30 jours. 3 200+ skinny transformés. Garantie remboursement 30 jours.",
     siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
     ogImage: "/og.png",
     locale: "fr_FR",
     favicon: "/favicon.ico",
     keywords: [
-      "coaching coachs",
-      "youtube coachs",
-      "scaler coaching",
-      "10k mois coach",
-      "youtube long format",
-      "stratégie YouTube",
+      "prise de masse skinny",
+      "programme fitness étudiant",
+      "ectomorphe muscu",
+      "maigre prendre du muscle",
+      "Iron Build",
+      "calories invisibles",
+      "programme maison sans salle",
     ],
     jsonLd: null,
   },
   theme: {
     colors: {
-      background: "#ffffff",
-      foreground: "#0a0a0a",
-      muted: "#6b7280",
-      border: "#e5e7eb",
-      card: "#fafafa",
-      primary: "#0a0a0a",
-      primaryForeground: "#ffffff",
-      accent: "#ff0000",
-      accentForeground: "#ffffff",
+      background: "#0E0E10",
+      foreground: "#F5F2EC",
+      muted: "#A8A29A",
+      border: "#2E2E33",
+      card: "#18181B",
+      primary: "#D85A30",
+      primaryForeground: "#F5F2EC",
+      accent: "#D85A30",
+      accentForeground: "#F5F2EC",
     },
     fonts: {
-      display: "Space Grotesk",
-      body: "Inter",
+      display: "Barlow Condensed",
+      body: "Syne",
     },
-    radius: "lg",
+    radius: "sm",
   },
   tracking: {
     fbPixelId: process.env.NEXT_PUBLIC_FB_PIXEL_ID || "",
@@ -296,25 +298,20 @@ export const siteConfig: SiteConfig = {
     scrollDepths: [25, 50, 75, 100],
     timeMilestones: [15, 30, 60, 120],
     customEvents: [
-      { name: "form_open", description: "Le visiteur ouvre le formulaire de qualif" },
-      { name: "form_step", description: "Validation d'une étape du formulaire" },
-      { name: "form_qualified", description: "Form complété avec un profil qualifié" },
-      { name: "form_unqualified", description: "Form complété avec un profil non qualifié (CA < 1k€)" },
-      { name: "form_abandoned", description: "Form fermé en cours de saisie" },
-      { name: "booking_success", description: "Booking Cal.com confirmé" },
+      { name: "checkout_click", description: "Clic sur le CTA principal (accès programme 27€)" },
+      { name: "order_bump_view", description: "Section Pricing visible (order bump en vue)" },
     ],
   },
   links: {
-    primaryCta: CALENDLY_FALLBACK,
-    checkout: process.env.NEXT_PUBLIC_CHECKOUT_URL || "",
+    primaryCta: CHECKOUT_URL,
+    checkout: CHECKOUT_URL,
   },
   forms: {
     qualification: {
       id: "qualification",
       intro: {
-        headline: "On checke si on est le bon match.",
-        subheadline:
-          "6 questions rapides pour qu'on parte sur l'appel avec du concret. Pas de pitch automatique derrière — juste un audit honnête.",
+        headline: "Quelques questions rapides.",
+        subheadline: "Pour s'assurer qu'Iron Build est adapté à ton profil.",
       },
       questions: [
         {
@@ -325,263 +322,350 @@ export const siteConfig: SiteConfig = {
           required: true,
         },
         {
-          id: "niche",
+          id: "duration",
           type: "text",
-          label: "Tu coaches dans quel domaine ?",
-          placeholder: "Ex : coach de vie, business, fitness, parentalité…",
+          label: "Depuis combien de temps tu t'entraînes sans résultats visibles ?",
+          placeholder: "Ex : 8 mois, 2 ans...",
           required: true,
-        },
-        {
-          id: "revenue",
-          type: "choice",
-          label: "Ton CA mensuel actuel ?",
-          required: true,
-          options: [
-            { value: "<1k", label: "Moins de 1 000€", disqualifies: true },
-            { value: "1-3k", label: "1 000€ – 3 000€" },
-            { value: "3-5k", label: "3 000€ – 5 000€" },
-            { value: "5-10k", label: "5 000€ – 10 000€" },
-            { value: "10k+", label: "Plus de 10 000€" },
-          ],
-        },
-        {
-          id: "youtube",
-          type: "choice",
-          label: "Tu fais déjà du YouTube long format ?",
-          required: true,
-          options: [
-            { value: "no", label: "Non, jamais touché" },
-            { value: "sometimes", label: "Oui, sporadiquement" },
-            { value: "regular", label: "Oui, régulièrement" },
-          ],
-        },
-        {
-          id: "pain",
-          type: "textarea",
-          label: "C'est quoi ton plus gros frein là, maintenant ?",
-          placeholder: "En 2-3 phrases, ce qui te bloque vraiment aujourd'hui.",
-          required: true,
-          maxLength: 400,
         },
         {
           id: "email",
           type: "email",
-          label: "Ton email pour qu'on confirme le rendez-vous",
+          label: "Ton email",
           placeholder: "ton@email.com",
           required: true,
         },
       ],
       unqualifiedScreen: {
-        headline: "On est trop tôt pour bosser ensemble.",
+        headline: "Iron Build n'est pas fait pour toi.",
         description:
-          "L'accompagnement est calibré pour les coachs qui ont déjà au moins 1 000€/mois — c'est à partir de là que le levier YouTube fait sens. En dessous, le sujet c'est pas YouTube, c'est l'offre et le positionnement. Reviens me voir quand t'auras passé ce cap, on regardera vraiment.",
+          "Le programme est conçu pour ceux qui s'entraînent déjà mais stagnent. Reviens quand tu auras commencé.",
       },
       successScreen: {
         kind: "calcom",
-        calcomLink: CALCOM_LINK,
-        namespace: CALCOM_NAMESPACE,
-        headline: "On est bons. Choisis ton créneau.",
-        subheadline: "30 minutes, en visio. Pas de pitch, juste un audit honnête de ta situation.",
+        calcomLink: "ironbuild/discovery",
+        namespace: "qualification",
+        headline: "C'est bon.",
+        subheadline: "Tu reçois un email avec ton accès sous 2 minutes.",
       },
-      redirectAfterBooking: "/merci",
     },
   },
   marquee: {
     enabled: true,
     items: [
-      "1 vidéo YouTube par semaine",
-      "Coaching 1:1 · 12 semaines",
-      "Sans Reels",
-      "Sans ads",
-      "Sans burn-out",
-      "10 000€/mois",
-      "YouTube long format",
-      "Audit positionnement inclus",
+      "3 200+ skinny transformés",
+      "+4,8 kg en 30 jours",
+      "Garantie remboursement 30 jours",
+      "Version salle + maison",
+      "Prix étudiant 27€",
+      "Méthode calories invisibles",
+      "Accès à vie inclus",
     ],
   },
   sections: {
     hero: {
       enabled: true,
-      headline: "Passe de 3 000€ à 10 000€/mois. Avec 1 vidéo YouTube par semaine.",
-      headlineHighlight: "1 vidéo YouTube par semaine",
+      badge: "■ 3 200+ skinny transformés",
+      headline: "De Skinny à Solide en 30 jours — même si t'as jamais réussi à prendre du muscle",
+      headlineHighlight: "30 jours",
       subheadline:
-        "Sans Reels. Sans ads. Sans burn-out de contenu. Une méthode 1:1 pour les coachs qui ont arrêté d'attendre que l'algo Insta les remarque.",
+        "T'as mangé. T'as soulevé. T'as rien vu. C'est pas toi. C'est la méthode.",
       primaryCta: {
-        label: "Réserver mon appel découverte",
-        href: CALENDLY_FALLBACK,
+        label: "Accéder — 27€ →",
+        href: CHECKOUT_URL,
         variant: "primary",
-        trackingEvent: "Lead",
-        formId: "qualification",
+        trackingEvent: "InitiateCheckout",
       },
-      visual: { kind: "none" },
-      trustLine: "Coaching 1:1 · 12 semaines · Pas de groupe, pas de Discord.",
+      secondaryCta: {
+        label: "Voir les résultats →",
+        href: "#testimonials",
+        variant: "ghost",
+      },
+      visual: {
+        kind: "beforeafter",
+        before: "/images/avant.jpg",
+        after: "/images/apres.jpg",
+      },
+      trustLine: "Garantie 30 jours · Accès immédiat · Sans salle",
     },
     socialProof: {
-      enabled: false,
-      caption: "Ils ont fait confiance à la méthode",
+      enabled: true,
+      caption: "Rejoins 3 200+ skinny déjà transformés",
       logos: [],
-      stats: [],
-      shortQuotes: [],
+      stats: [
+        { value: "3 200+", label: "Skinny transformés" },
+        { value: "+4,8 kg", label: "En 30 jours en moyenne" },
+        { value: "30 jours", label: "Garantie remboursement" },
+        { value: "27€", label: "Prix unique étudiant" },
+      ],
+      shortQuotes: [
+        {
+          quote: "C'était pas ma génétique. Je mangeais trop peu. C'est tout.",
+          author: "Lucas M. · +4,8 kg en 30 j",
+        },
+        {
+          quote: "+6,2 kg en 45 j. J'avais cramé 400€ en coaching avant ça.",
+          author: "Romain G. · 23 ans · Paris",
+        },
+      ],
     },
     problem: {
       enabled: true,
-      dark: false,
+      dark: true,
       eyebrow: "Le vrai problème",
-      headline:
-        "Si tu fais 3-5k€/mois en postant tous les jours, ce n'est pas un problème de contenu. C'est un problème de format.",
+      headline: "T'es pas skinny pour la vie. T'as juste la mauvaise méthode.",
       description:
-        "Le contenu court attire des curieux. Les curieux likent, ils n'achètent pas. Tu peux poster 5 Reels par semaine pendant 2 ans : tu auras plus d'abonnés, pas plus de clients à 1 000€+.",
+        "T'as beau manger. T'as beau t'entraîner. Ça stagne. Pas ta faute. La méthode est fausse.",
       pains: [
         {
-          title: "Tu cours après l'algo, pas après tes clients",
+          title: "\"Je mange beaucoup et grossis pas\"",
           description:
-            "Tu passes 15h par semaine sur Insta pour 1-2 clients par mois. Tu sais que c'est pas viable. Tu sais pas comment sortir.",
+            "Tu manges 500 kcal sous ton besoin. Chaque jour. Ton corps brûle tout. Aucun programme générique te le dit.",
         },
         {
-          title: "Tes followers grossissent, ton CA stagne",
+          title: "18 mois de salle. Même corps.",
           description:
-            "+500 abonnés ce mois-ci. 1 client signé. Le ratio attention → vente est cassé, et personne te le dit clairement.",
+            "T'as payé. T'es allé. T'as suivi. Et ton miroir dit la même chose qu'au premier jour. C'est pas toi. C'est la méthode.",
         },
         {
-          title: "Tu attires des curieux, pas des acheteurs",
+          title: "Les autres grossissent. Toi non.",
           description:
-            "Le contenu court divertit. Pour vendre 1k€+, il faut éduquer. Et éduquer en 90 secondes c'est mathématiquement impossible.",
+            "Dans ta promo, ils progressent. Toi non. Mêmes conseils. Même effort. Frustrant. Et explicable.",
         },
         {
-          title: "Tu sens que YouTube serait mieux. Tu te lances pas.",
+          title: "Tu commences à croire à ta génétique.",
           description:
-            "T'as peur de la caméra. T'as peur de pas savoir quoi dire. T'as peur que ça décolle pas. Donc tu retournes sur Insta.",
+            "Logique après des mois sans résultat. Mais c'est faux. La génétique fixe le plafond. Pas le sol.",
         },
       ],
     },
     solution: {
       enabled: true,
-      dark: true,
-      eyebrow: "La méthode",
-      headline: "1 vidéo YouTube par semaine. Qui pré-vend ton offre 24/7.",
+      dark: false,
+      eyebrow: "La méthode Iron Build",
+      headline: "Une approche 100% calibrée pour les métabolismes rapides.",
       description:
-        "Une vidéo longue ne demande pas plus de temps que 5 Reels mal foutus. Elle fait l'inverse : elle continue de bosser pour toi pendant 6, 12, 24 mois. Quand un prospect arrive sur ton appel, t'as déjà passé 30 minutes à le convaincre.",
+        "Chaque calorie calculée pour TON corps. Chaque séance pensée pour ton emploi du temps. Pas une moyenne. TON profil skinny.",
       bullets: [
-        "Une vidéo = 30 minutes de pré-vente pendant que tu dors",
-        "Tes prospects arrivent en appel déjà éduqués, déjà convaincus",
-        "Ton tunnel ne dépend plus d'un algo qui change tous les 3 mois",
-        "Chaque vidéo continue de générer des appels pendant des années (SEO YouTube)",
+        "Calories calculées pour TON métabolisme — pas une moyenne",
+        "+990 kcal/jour sans manger plus — la technique invisible",
+        "Version salle et maison — tu commences là où t'es",
+        "Résultats en 30 jours — ou remboursé. Zéro question.",
       ],
     },
     features: {
       enabled: true,
-      dark: false,
+      dark: true,
       eyebrow: "Ce que tu obtiens",
-      headline: "Coaching 1:1 sur 12 semaines. Toi et moi. C'est tout.",
+      headline: "Tout ce qu'il faut. Rien de superflu.",
       description:
-        "Pas de groupe Telegram saturé. Pas de cours en autonomie où tu t'endors à la 3ème vidéo. Un audit complet, une méthode appliquée à ton business, un appel par semaine pour exécuter.",
+        "Programme complet, accès immédiat après paiement. Tu télécharges, tu commences aujourd'hui.",
       features: [
         {
           icon: "target",
-          title: "Audit de positionnement",
+          title: "Programme split 3/4/5 jours",
           description:
-            "Première semaine : on dissèque ton offre, ton ICP et ton écosystème actuel. Tu repars avec un positionnement unique en moins de 7 jours.",
-        },
-        {
-          icon: "spark",
-          title: "Méthode d'écriture",
-          description:
-            "Le cœur du programme. Comment scripter une vidéo qui informe ET pré-vend, sans tomber dans la promo lourde. Templates inclus.",
-        },
-        {
-          icon: "compass",
-          title: "Stratégie de sujets",
-          description:
-            "On définit les 24 prochains sujets de tes vidéos — ceux qui attirent les coachs prêts à investir 1-3k€, pas les curieux qui font défiler.",
-        },
-        {
-          icon: "rocket",
-          title: "Coaching 1:1 hebdomadaire",
-          description:
-            "1 appel par semaine pendant 12 semaines. Tu m'envoies tes scripts, on les retravaille en live. Pas d'attente, pas de thread Discord.",
+            "3 variations selon ton emploi du temps et ton niveau. Version salle ET version maison avec sac lesté — aucun abonnement requis.",
         },
         {
           icon: "chart",
-          title: "Optimisation conversion",
+          title: "Plan alimentaire + calculateur calories",
           description:
-            "Comment transformer une vue YouTube en appel booké. Description, CTA, lead magnet, pinned comment — tout est cadré.",
+            "Formule de calcul précise pour TON métabolisme. Tu sais exactement quoi manger, en quelle quantité, et à quel moment.",
         },
         {
-          icon: "clock",
-          title: "Suivi WhatsApp 12 semaines",
+          icon: "spark",
+          title: "Technique des calories invisibles",
           description:
-            "Accès direct sur WhatsApp pour les questions courtes entre les sessions. Réponse sous 24h en semaine.",
+            "+990 kcal par jour sans augmenter le volume de nourriture. La technique skinny que 99% des programmes ignorent — et qui change tout.",
+        },
+        {
+          icon: "rocket",
+          title: "Tracker de progression 8 semaines",
+          description:
+            "Tableau de bord simple : poids, mensurations, photos toutes les 2 semaines. Tu vois ta progression — ça change tout pour la motivation.",
+        },
+        {
+          icon: "zap",
+          title: "Bonus : Nutrition Express (add-on 9€)",
+          description:
+            "30 recettes rapides + 15 shakes hypercaloriques. Meal prep du dimanche en 1h, liste de courses à 30€/semaine. Disponible en option lors de l'achat.",
+        },
+        {
+          icon: "shield",
+          title: "Accès à vie + mises à jour gratuites",
+          description:
+            "Tu achètes une fois, tu gardes pour toujours. Toutes les futures versions du programme sont incluses — sans supplément.",
         },
       ],
     },
     testimonials: {
-      enabled: false,
-      eyebrow: "Ils l'ont fait",
-      headline: "",
-      testimonials: [],
+      enabled: true,
+      eyebrow: "Ils ont appliqué la méthode",
+      headline: "Leurs mots. Pas les nôtres.",
+      testimonials: [
+        {
+          quote:
+            "Sérieux j'avais abandonné. Un an et demi de salle. Rien. Semaine 4 avec Iron Build, mes potes me demandaient ce que je faisais. +4,8 kg. C'était pas ma génétique. Je mangeais 500 kcal trop peu chaque jour.",
+          name: "Lucas M.",
+          role: "21 ans · BUT Informatique · Lyon",
+          photo: "/images/avatar-lucas.svg",
+          result: "+4,8 kg en 30 jours",
+        },
+        {
+          quote:
+            "J'ai cramé 400€ en coaching. Rien. Iron Build m'a montré pourquoi en 5 minutes. La technique des calories invisibles. 45 jours plus tard : +6,2 kg. Frère j'aurais dû commencer là.",
+          name: "Romain G.",
+          role: "23 ans · Licence Droit · Paris",
+          photo: "/images/avatar-romain.svg",
+          result: "+6,2 kg en 45 jours",
+        },
+        {
+          quote:
+            "Même pas de salle. Version maison. Barre de traction sur la porte, sac à dos lesté. +5,1 kg en 5 semaines. La salle c'est pas le problème. C'est le plan alimentaire qui change tout.",
+          name: "Antoine F.",
+          role: "20 ans · IUT Informatique · Bordeaux",
+          photo: "/images/avatar-antoine.svg",
+          result: "+5,1 kg en 35 jours",
+        },
+        {
+          quote:
+            "L2 médecine. 50h de cours. Zéro temps. Iron Build c'est 45 min de séance et 1h de meal prep le dimanche. Rien de plus. +3,4 kg en 30 jours. Système simple. Ça marche.",
+          name: "Thomas K.",
+          role: "22 ans · L2 Médecine · Strasbourg",
+          photo: "/images/avatar-thomas.svg",
+          result: "+3,4 kg en 30 jours",
+        },
+        {
+          quote:
+            "Ma famille dit depuis toujours 'c'est génétique'. J'y croyais. Semaine 4 : +4,2 kg. Je me regarde dans le miroir. Je kiffe enfin. Je mangeais 700 kcal trop peu. C'est tout.",
+          name: "Nathan B.",
+          role: "24 ans · Master Marketing · Nantes",
+          photo: "/images/avatar-nathan.svg",
+          result: "+4,2 kg en 28 jours",
+        },
+        {
+          quote:
+            "Je suis désorganisé au max. Iron Build c'est une checklist. 4 cases le soir. 1h le dimanche. Rien de plus. +5,5 kg en 6 semaines. Le système marche même pour les gens comme moi.",
+          name: "Maxime D.",
+          role: "20 ans · Licence Physique · Lille",
+          photo: "/images/avatar-maxime.svg",
+          result: "+5,5 kg en 42 jours",
+        },
+      ],
     },
     pricing: {
-      enabled: false,
-      eyebrow: "",
-      headline: "",
-      description: "",
-      plans: [],
+      enabled: true,
+      eyebrow: "Investissement",
+      headline: "Un prix étudiant. Des résultats réels.",
+      description:
+        "27€ là où les coachs facturent 200 à 400€ pour moins de résultats. Garanti ou remboursé.",
+      plans: [
+        {
+          name: "Iron Build™",
+          price: "27€",
+          originalPrice: "97€",
+          period: "accès à vie",
+          description:
+            "Tout ce qu'il faut pour passer de skinny à solide en 30 jours.",
+          features: [
+            "Programme split 3/4/5 jours (salle + maison)",
+            "Plan alimentaire calculé pour ton métabolisme",
+            "Technique des calories invisibles (+990 kcal/jour)",
+            "Tracker de progression 8 semaines",
+            "Accès à vie + mises à jour gratuites",
+            "Garantie remboursement 30 jours — zéro question",
+          ],
+          cta: {
+            label: "Accéder au programme — 27€",
+            href: CHECKOUT_URL,
+            variant: "primary",
+            trackingEvent: "InitiateCheckout",
+          },
+          highlighted: true,
+          badge: "Offre de lancement",
+          orderBump: {
+            label: "Nutrition Express",
+            price: "9€",
+            description: "30 recettes rapides + 15 shakes hypercaloriques. Meal prep du dimanche en 1h.",
+          },
+        },
+      ],
+      guarantee:
+        "30 jours. Zéro résultat → remboursé. Un email suffit. Aucune question. Aucune justification.",
     },
     faq: {
       enabled: true,
       dark: false,
       eyebrow: "FAQ",
-      headline: "Les vraies questions qu'on me pose en appel.",
+      headline: "Les questions qu'on me pose en vrai.",
       items: [
         {
-          question: "YouTube ça prend pas des mois à décoller ?",
+          question: "J'ai déjà essayé des programmes. Ça a jamais marché. Pourquoi ça marcherait là ?",
           answer:
-            "Non — quand tu t'adresses à un public restreint et qu'on optimise chaque vidéo pour la conversion (pas pour les vues), tu n'as pas besoin de millions de vues. 500 vues qualifiées valent mieux que 50 000 vues curieuses. Mes clients signent leur premier client YouTube entre la 3ème et la 5ème vidéo.",
+            "Parce que les autres sont calibrés pour des profils moyens. Iron Build est fait pour les métabolismes rapides. Chaque calorie calculée pour TON corps. La garantie 30 jours te protège si t'as le moindre doute.",
         },
         {
-          question: "J'ai pas le temps de tourner et monter une vidéo par semaine.",
+          question: "C'est ma génétique. Aucun programme peut changer ça.",
           answer:
-            "1 vidéo YouTube = 4 à 6h de travail (script, tournage, montage). Tu en récupères 10 en arrêtant de spam Insta. Mathématiquement, tu dégages du temps — pas l'inverse.",
+            "La génétique fixe le plafond. Pas le sol. 99% des skinny qui stagnent mangent trop peu. C'est tout. Lucas M. disait la même chose. +4,8 kg en 30 jours.",
         },
         {
-          question: "Je sais pas écrire / je suis pas à l'aise face caméra.",
+          question: "27€ c'est quoi le catch ?",
           answer:
-            "C'est exactement ce qu'on travaille en coaching. L'écriture s'apprend en 4 semaines avec la bonne méthode. La caméra, c'est de la répétition — et un script bien écrit règle 80% de ton inconfort dès la 3ème vidéo.",
+            "Le prix bas c'est un choix. L'objectif c'est rendre la méthode accessible. Romain G. avait cramé 400€ en coaching. Iron Build à 27€ lui a donné +6,2 kg en 45 jours. La garantie est là si t'as le moindre doute.",
         },
         {
-          question: "Et si ça marche pas pour ma niche ?",
+          question: "J'ai pas de salle. Ça marche quand même ?",
           answer:
-            "YouTube fonctionne pour toutes les niches qui ont un client à plus de 500€ — coachs business, coachs de vie, fitness, nutrition, parentalité, dev perso, finance, immobilier. La question c'est jamais 'est-ce que ma niche marche', c'est 'est-ce que je sais m'adresser à la bonne personne dedans'.",
+            "Oui. Version maison complète incluse. Pompes, tractions, sac lesté. Antoine F. a pris +5,1 kg en 35 jours sans jamais aller en salle. C'est le plan alimentaire qui change tout — pas l'équipement.",
         },
         {
-          question: "Pourquoi pas un programme groupe moins cher ?",
+          question: "J'ai un emploi du temps de ouf. Combien de temps ça prend ?",
           answer:
-            "Parce que ton positionnement est unique — un programme groupe ne peut pas le travailler sérieusement. Sur 12 semaines, on adapte chaque vidéo à TA chaîne, TON ICP, TES forces. C'est pour ça que ce n'est pas 297€ et pas en groupe.",
+            "45 minutes de séance. 1h de meal prep le dimanche. C'est tout. Thomas K. en L2 médecine a pris +3,4 kg en 30 jours. Si lui il a pu, t'as aucune excuse.",
+        },
+        {
+          question: "Je reçois comment le programme ?",
+          answer:
+            "Accès immédiat. Paiement confirmé → email avec le lien. Tout en moins de 2 minutes. Plan d'entraînement, plan alimentaire, tracker, calculateur.",
+        },
+        {
+          question: "La garantie 30 jours c'est vraiment sérieux ?",
+          answer:
+            "Oui. Tu suis la méthode, t'as pas de résultats, on rembourse. Un email suffit. Zéro question. Zéro justification. Zéro procédure.",
         },
       ],
     },
     finalCta: {
       enabled: true,
       dark: true,
-      headline: "Prêt à arrêter de courir après l'algo Insta ?",
+      headline: "T'as stagné assez longtemps.",
       subheadline:
-        "30 minutes pour qu'on regarde ensemble si ta chaîne YouTube peut t'amener à 10 000€/mois. Pas de pitch, pas de pression — juste un audit honnête.",
+        "3 200 skinny ont commencé avant toi. 27€. Accès immédiat. Résultats en 30 jours ou remboursé.",
       cta: {
-        label: "Réserver mon appel découverte",
-        href: CALENDLY_FALLBACK,
+        label: "Accéder au programme — 27€",
+        href: CHECKOUT_URL,
         variant: "primary",
-        trackingEvent: "Lead",
-        formId: "qualification",
+        trackingEvent: "InitiateCheckout",
       },
-      microTrust: "Pas de pitch. Pas de pression. 30 min en visio.",
+      microTrust: "Accès immédiat · Garantie 30 jours · Sans salle",
     },
     footer: {
       enabled: true,
       dark: true,
-      brand: "Titouan",
-      links: [],
-      socials: [],
-      legal: `© ${new Date().getFullYear()} Titouan. Tous droits réservés.`,
+      brand: "IRON ■ BUILD™",
+      tagline: "De Skinny à Solide",
+      links: [
+        { label: "Mentions légales", href: "/mentions-legales" },
+        { label: "CGV", href: "/cgv" },
+        { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
+      ],
+      socials: [
+        { platform: "instagram", href: "https://instagram.com/ironbuild" },
+        { platform: "tiktok", href: "https://tiktok.com/@ironbuild" },
+      ],
+      legal: `© ${new Date().getFullYear()} Iron Build™. Tous droits réservés.`,
     },
   },
 };

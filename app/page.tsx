@@ -10,11 +10,13 @@ import { FAQ } from "@/components/sections/FAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Footer } from "@/components/sections/Footer";
 import { Marquee } from "@/components/ui/Marquee";
+import { UrgencyBar } from "@/components/ui/UrgencyBar";
 
 export default function HomePage() {
   const s = siteConfig.sections;
   return (
     <main className="relative">
+      <UrgencyBar />
       {s.hero.enabled && <Hero />}
       <Marquee />
       {s.socialProof.enabled && <SocialProof />}

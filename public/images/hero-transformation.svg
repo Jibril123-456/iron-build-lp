@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <rect width="1200" height="600" fill="#18181B"/>
+
+  <!-- Divider line -->
+  <line x1="600" y1="0" x2="600" y2="600" stroke="#D85A30" stroke-width="3"/>
+
+  <!-- AVANT side -->
+  <rect x="0" y="0" width="600" height="600" fill="#0E0E10"/>
+  <!-- Silhouette mince -->
+  <ellipse cx="300" cy="140" rx="50" ry="50" fill="#2E2E33"/>
+  <rect x="270" y="190" width="60" height="180" rx="8" fill="#2E2E33"/>
+  <rect x="240" y="200" width="28" height="130" rx="8" fill="#2E2E33"/>
+  <rect x="332" y="200" width="28" height="130" rx="8" fill="#2E2E33"/>
+  <rect x="262" y="370" width="30" height="120" rx="8" fill="#2E2E33"/>
+  <rect x="308" y="370" width="30" height="120" rx="8" fill="#2E2E33"/>
+
+  <!-- Label AVANT -->
+  <rect x="20" y="20" width="80" height="28" rx="4" fill="rgba(14,14,16,0.85)" stroke="#2E2E33" stroke-width="1"/>
+  <text x="60" y="39" font-family="monospace" font-size="10" fill="#A8A29A" text-anchor="middle" letter-spacing="3">AVANT</text>
+
+  <!-- Stats AVANT -->
+  <rect x="180" y="520" width="240" height="56" rx="4" fill="#222226"/>
+  <text x="300" y="543" font-family="monospace" font-size="9" fill="#A8A29A" text-anchor="middle" letter-spacing="2">POIDS DE DÉPART</text>
+  <text x="300" y="565" font-family="sans-serif" font-size="22" font-weight="900" fill="#F5F2EC" text-anchor="middle">63 kg</text>
+
+  <!-- APRÈS side -->
+  <rect x="600" y="0" width="600" height="600" fill="#0E0E10"/>
+  <!-- Silhouette musclée -->
+  <ellipse cx="900" cy="140" rx="55" ry="52" fill="#2E2E33"/>
+  <rect x="860" y="190" width="80" height="185" rx="8" fill="#2E2E33"/>
+  <!-- épaules plus larges -->
+  <rect x="815" y="196" width="44" height="135" rx="8" fill="#2E2E33"/>
+  <rect x="941" y="196" width="44" height="135" rx="8" fill="#2E2E33"/>
+  <!-- jambes -->
+  <rect x="855" y="373" width="38" height="118" rx="8" fill="#2E2E33"/>
+  <rect x="907" y="373" width="38" height="118" rx="8" fill="#2E2E33"/>
+
+  <!-- Label APRÈS -->
+  <rect x="1100" y="20" width="80" height="28" rx="4" fill="rgba(216,90,48,0.9)"/>
+  <text x="1140" y="39" font-family="monospace" font-size="10" fill="#0E0E10" font-weight="700" text-anchor="middle" letter-spacing="3">APRÈS</text>
+
+  <!-- Stats APRÈS -->
+  <rect x="780" y="520" width="240" height="56" rx="4" fill="#222226" stroke="#D85A30" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="900" y="543" font-family="monospace" font-size="9" fill="#D85A30" text-anchor="middle" letter-spacing="2">RÉSULTAT 30 JOURS</text>
+  <text x="900" y="565" font-family="sans-serif" font-size="22" font-weight="900" fill="#D85A30" text-anchor="middle">+4,8 kg</text>
+
+  <!-- Handle central -->
+  <circle cx="600" cy="300" r="22" fill="#D85A30"/>
+  <text x="600" y="307" font-family="sans-serif" font-size="16" fill="#0E0E10" font-weight="900" text-anchor="middle">⇄</text>
+
+  <!-- Watermark placeholder -->
+  <text x="600" y="470" font-family="monospace" font-size="11" fill="#2E2E33" text-anchor="middle" letter-spacing="3">→ REMPLACE PAR TA VRAIE PHOTO AVANT/APRÈS ←</text>
+</svg>

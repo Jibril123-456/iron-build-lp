@@ -48,7 +48,12 @@ export function Pricing() {
                   <p className="mt-1 text-sm text-muted">{plan.description}</p>
                 )}
                 <div className="mt-5 flex items-baseline gap-2">
-                  <span className="text-4xl font-bold tracking-tight">{plan.price}</span>
+                  {(plan as { originalPrice?: string }).originalPrice && (
+                    <span className="text-xl text-muted line-through">
+                      {(plan as { originalPrice?: string }).originalPrice}
+                    </span>
+                  )}
+                  <span className="text-4xl font-bold tracking-tight text-accent">{plan.price}</span>
                   {plan.period && (
                     <span className="text-sm text-muted">{plan.period}</span>
                   )}
@@ -69,7 +74,28 @@ export function Pricing() {
                 ))}
               </ul>
 
-              <div className="mt-7">
+              {(plan as { orderBump?: { label: string; price: string; description: string } }).orderBump && (
+                <div className="mt-5 rounded border border-accent/30 bg-accent/5 p-4">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-accent mb-1.5">
+                    Ajouter en option
+                  </p>
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">
+                        {(plan as { orderBump?: { label: string; price: string; description: string } }).orderBump!.label}
+                      </p>
+                      <p className="text-xs text-muted mt-0.5">
+                        {(plan as { orderBump?: { label: string; price: string; description: string } }).orderBump!.description}
+                      </p>
+                    </div>
+                    <span className="text-sm font-black text-accent shrink-0">
+                      {(plan as { orderBump?: { label: string; price: string; description: string } }).orderBump!.price}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-5">
                 <Button cta={plan.cta} size="md" block />
               </div>
             </article>

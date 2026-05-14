@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { siteConfig } from "@/config/site";
-import { fontBody, fontDisplay } from "@/lib/fonts";
+import { fontBody, fontDisplay, fontMono } from "@/lib/fonts";
 import { themeToCssVars } from "@/lib/theme";
 import { FacebookPixel } from "@/components/tracking/FacebookPixel";
 import { GoogleAnalytics } from "@/components/tracking/GoogleAnalytics";
+import { MicrosoftClarity } from "@/components/tracking/MicrosoftClarity";
 import { ScrollTracker } from "@/components/tracking/ScrollTracker";
 import { TimeTracker } from "@/components/tracking/TimeTracker";
 import { UTMCapture } from "@/components/tracking/UTMCapture";
@@ -31,7 +32,6 @@ export const metadata: Metadata = {
     description: siteConfig.meta.description,
     images: [siteConfig.meta.ogImage],
   },
-  // Favicon auto-discovered from app/icon.svg
   alternates: { canonical: siteConfig.meta.siteUrl },
 };
 
@@ -48,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang={lang}
-      className={`${fontDisplay.variable} ${fontBody.variable}`}
+      className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}
       style={themeVars}
       suppressHydrationWarning
     >
@@ -62,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <FacebookPixel />
         <GoogleAnalytics />
+        <MicrosoftClarity />
         <UTMCapture />
         <PageViewTracker />
         <ScrollTracker />

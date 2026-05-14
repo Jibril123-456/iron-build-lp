@@ -12,9 +12,69 @@ function renderHeadline(headline: string, highlight?: string) {
   return (
     <>
       {before}
-      <span className="animated-underline">{highlight}</span>
+      <span className="text-accent">{highlight}</span>
       {after}
     </>
+  );
+}
+
+function BeforeAfterVisual({ before, after }: { before: string; after: string }) {
+  return (
+    <div className="grid grid-cols-2 gap-[3px] overflow-hidden rounded-sm">
+      {/* AVANT */}
+      <div className="relative overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={before}
+          alt="Avant — Iron Build"
+          className="w-full h-[420px] md:h-[540px] object-cover object-top"
+        />
+        {/* gradient masking the head */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-[42%]"
+          style={{ background: "linear-gradient(to bottom, #0E0E10 0%, #0E0E10 20%, transparent 100%)" }}
+        />
+        {/* label */}
+        <div className="absolute top-5 left-5 z-10">
+          <span
+            className="inline-block px-2.5 py-1 text-[9px] font-medium uppercase tracking-[0.22em]"
+            style={{ background: "rgba(14,14,16,0.82)", border: "1px solid #2E2E33", color: "#A8A29A" }}
+          >
+            Avant
+          </span>
+        </div>
+        {/* bottom stat */}
+        <div className="absolute bottom-0 inset-x-0 p-4" style={{ background: "linear-gradient(to top, #0E0E10 60%, transparent)" }}>
+          <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted mb-0.5">Stagnation · 18 mois</p>
+          <p className="text-xl font-black tracking-tight text-foreground">Aucun résultat visible</p>
+        </div>
+      </div>
+
+      {/* APRÈS */}
+      <div className="relative overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={after}
+          alt="Après — Iron Build"
+          className="w-full h-[420px] md:h-[540px] object-cover object-top"
+        />
+        {/* label */}
+        <div className="absolute top-5 right-5 z-10">
+          <span
+            className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.22em]"
+            style={{ background: "#D85A30", color: "#0E0E10" }}
+          >
+            Après
+          </span>
+        </div>
+        {/* bottom stat */}
+        <div className="absolute bottom-0 inset-x-0 p-4" style={{ background: "linear-gradient(to top, #0E0E10 60%, transparent)" }}>
+          <p className="text-[10px] font-medium uppercase tracking-[0.18em] mb-0.5" style={{ color: "#D85A30" }}>Iron Build · 30 jours</p>
+          <p className="text-xl font-black tracking-tight" style={{ color: "#D85A30" }}>+4,8 kg de muscle</p>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -37,16 +97,17 @@ export function Hero() {
 
       <div className="relative mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          {/* Live indicator */}
-          <AnimateIn>
-            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inset-0 rounded-full bg-[#ff0000] animate-blink" />
-                <span className="rounded-full h-2 w-2 bg-[#ff0000]" />
-              </span>
-              <span>Cohorte ouverte · 3 places restantes</span>
-            </div>
-          </AnimateIn>
+          {h.liveIndicator && (
+            <AnimateIn>
+              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inset-0 rounded-full bg-[#ff0000] animate-blink" />
+                  <span className="rounded-full h-2 w-2 bg-[#ff0000]" />
+                </span>
+                <span>{h.liveIndicator}</span>
+              </div>
+            </AnimateIn>
+          )}
 
           {h.badge && (
             <AnimateIn>
@@ -82,13 +143,18 @@ export function Hero() {
 
         {h.visual && h.visual.kind !== "none" && (
           <AnimateIn delay={520}>
-            <div className="mt-16 md:mt-20 max-w-5xl mx-auto">
-              <div className="relative rounded-2xl border border-border bg-card overflow-hidden shadow-2xl shadow-black/10">
-                {h.visual.kind === "image" && (
-                  // eslint-disable-next-line @next/next/no-img-element
+            <div className="mt-16 md:mt-20 max-w-3xl mx-auto">
+              {h.visual.kind === "beforeafter" && (
+                <BeforeAfterVisual before={h.visual.before} after={h.visual.after} />
+              )}
+              {h.visual.kind === "image" && (
+                <div className="relative rounded-sm border border-border bg-card overflow-hidden shadow-2xl shadow-black/10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={h.visual.src} alt={h.visual.alt} className="w-full h-auto" />
-                )}
-                {h.visual.kind === "video" && (
+                </div>
+              )}
+              {h.visual.kind === "video" && (
+                <div className="relative rounded-sm border border-border bg-card overflow-hidden shadow-2xl shadow-black/10">
                   <video
                     src={h.visual.src}
                     poster={h.visual.poster}
@@ -96,11 +162,13 @@ export function Hero() {
                     playsInline
                     className="w-full h-auto"
                   />
-                )}
-                {h.visual.kind === "embed" && (
+                </div>
+              )}
+              {h.visual.kind === "embed" && (
+                <div className="relative rounded-sm border border-border bg-card overflow-hidden shadow-2xl shadow-black/10">
                   <div dangerouslySetInnerHTML={{ __html: h.visual.html }} />
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </AnimateIn>
         )}

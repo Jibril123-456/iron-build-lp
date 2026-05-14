@@ -1,24 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #ffffff;
-  --color-foreground: #0a0a0a;
-  --color-muted: #6b7280;
-  --color-border: #e5e7eb;
-  --color-card: #fafafa;
-  --color-primary: #0a0a0a;
-  --color-primary-foreground: #ffffff;
-  --color-accent: #ff0000;
-  --color-accent-foreground: #ffffff;
+  --color-background: #0E0E10;
+  --color-foreground: #F5F2EC;
+  --color-muted: #A8A29A;
+  --color-border: #2E2E33;
+  --color-card: #18181B;
+  --color-primary: #D85A30;
+  --color-primary-foreground: #F5F2EC;
+  --color-accent: #D85A30;
+  --color-accent-foreground: #F5F2EC;
 
-  --radius: 0.75rem;
+  --radius: 0.375rem;
 
   --font-display: var(--font-display, ui-sans-serif, system-ui, sans-serif);
   --font-body: var(--font-body, ui-sans-serif, system-ui, sans-serif);
+  --font-mono: var(--font-mono, ui-monospace, monospace);
 }
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html,
@@ -52,16 +53,16 @@ h1 {
   color: var(--color-accent-foreground);
 }
 
-/* Section dark variant — flips local theme tokens.
-   Children using bg-card / text-muted / border-border etc. inherit dark values. */
+/* Section dark variant — alternating background for visual rhythm.
+   Uses #18181B to create subtle contrast against the #0E0E10 base. */
 .section-dark {
-  --color-background: #0a0a0a;
-  --color-foreground: #ffffff;
-  --color-muted: #a1a1aa;
-  --color-border: #262626;
-  --color-card: #141414;
-  --color-primary: #ffffff;
-  --color-primary-foreground: #0a0a0a;
+  --color-background: #18181B;
+  --color-foreground: #F5F2EC;
+  --color-muted: #A8A29A;
+  --color-border: #2E2E33;
+  --color-card: #222226;
+  --color-primary: #F5F2EC;
+  --color-primary-foreground: #0E0E10;
   background: var(--color-background);
   color: var(--color-foreground);
 }
