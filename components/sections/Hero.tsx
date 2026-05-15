@@ -27,7 +27,7 @@ function BeforeAfterVisual({ before, after }: { before: string; after: string })
         <img
           src={before}
           alt="Avant — Iron Build"
-          className="w-full h-[420px] md:h-[540px] object-contain object-bottom"
+          className="w-full h-[420px] md:h-[540px] object-cover object-top scale-110 origin-top"
         />
         {/* gradient masking the head */}
         <div
@@ -57,7 +57,7 @@ function BeforeAfterVisual({ before, after }: { before: string; after: string })
         <img
           src={after}
           alt="Après — Iron Build"
-          className="w-full h-[420px] md:h-[540px] object-contain object-bottom"
+          className="w-full h-[420px] md:h-[540px] object-cover object-top scale-125 origin-top"
         />
         {/* label */}
         <div className="absolute top-5 right-5 z-10">
