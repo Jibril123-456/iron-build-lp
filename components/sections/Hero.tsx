@@ -20,7 +20,13 @@ function renderHeadline(headline: string, highlight?: string) {
 
 function BeforeAfterVisual({ before, after }: { before: string; after: string }) {
   return (
-    <div className="grid grid-cols-2 gap-[3px] overflow-hidden" style={{ border: "3px solid #D85A30" }}>
+    <div className="relative grid grid-cols-2 gap-0 overflow-hidden rounded-sm">
+      {/* séparateur vertical orange */}
+      <div
+        aria-hidden
+        className="absolute inset-y-0 z-20 w-[3px]"
+        style={{ left: "calc(50% - 1.5px)", background: "#D85A30" }}
+      />
       {/* AVANT */}
       <div className="relative overflow-hidden" style={{ background: "#0E0E10" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
