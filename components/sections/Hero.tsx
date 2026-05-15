@@ -20,14 +20,14 @@ function renderHeadline(headline: string, highlight?: string) {
 
 function BeforeAfterVisual({ before, after }: { before: string; after: string }) {
   return (
-    <div className="grid grid-cols-2 gap-[3px] overflow-hidden rounded-sm">
+    <div className="grid grid-cols-2 gap-[3px] overflow-hidden" style={{ border: "3px solid #D85A30" }}>
       {/* AVANT */}
       <div className="relative overflow-hidden" style={{ background: "#0E0E10" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={before}
           alt="Avant — Iron Build"
-          className="w-full h-[420px] md:h-[540px] object-cover object-top scale-105 origin-top"
+          className="w-full h-[420px] md:h-[540px] object-cover object-top scale-95 origin-top"
         />
         {/* gradient masking the head */}
         <div
