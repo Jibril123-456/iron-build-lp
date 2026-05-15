@@ -22,7 +22,7 @@ function BeforeAfterVisual({ before, after }: { before: string; after: string })
   return (
     <div className="grid grid-cols-2 gap-[3px] overflow-hidden rounded-sm">
       {/* AVANT */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden" style={{ background: "#0E0E10" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={before}
@@ -52,7 +52,7 @@ function BeforeAfterVisual({ before, after }: { before: string; after: string })
       </div>
 
       {/* APRÈS */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden" style={{ background: "#0E0E10" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={after}
