@@ -150,7 +150,11 @@ export function Hero() {
               {h.visual.kind === "image" && (
                 <div className="relative rounded-sm border border-border bg-card overflow-hidden shadow-2xl shadow-black/10">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={h.visual.src} alt={h.visual.alt} className="w-full h-auto" />
+                  <img
+                    src={h.visual.src}
+                    alt={h.visual.alt}
+                    className="w-full h-auto max-h-[600px] object-cover object-top"
+                  />
                 </div>
               )}
               {h.visual.kind === "video" && (

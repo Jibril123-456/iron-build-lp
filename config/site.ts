@@ -381,9 +381,9 @@ export const siteConfig: SiteConfig = {
         variant: "ghost",
       },
       visual: {
-        kind: "beforeafter",
-        before: "/images/avant.jpg",
-        after: "/images/apres.jpg",
+        kind: "image",
+        src: "/images/hero-transformation.jpg",
+        alt: "Transformation Iron Build — avant après",
       },
       trustLine: "Garantie 30 jours · Accès immédiat · Sans salle",
     },
