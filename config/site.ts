@@ -382,8 +382,8 @@ export const siteConfig: SiteConfig = {
       },
       visual: {
         kind: "beforeafter",
-        before: "/images/avant.jpg",
-        after: "/images/apres.jpg",
+        before: "/images/avant.png",
+        after: "/images/apres.png",
       },
       trustLine: "Garantie 30 jours · Accès immédiat · Sans salle",
     },
